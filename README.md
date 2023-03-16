@@ -1,6 +1,8 @@
 # Binpacking-Visualizer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
+The application is based on https://github.com/SebLeich/storage-manager-2.0 and written with TypeScript (Angular 14) and implemented using three.js and Chart.js.
+
+Currently it is only used to visualize the results of the bin packing algorithms.
 
 ## Development server
 
