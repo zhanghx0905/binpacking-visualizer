@@ -1,23 +1,25 @@
-import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { IGood } from 'src/app/interfaces/i-good.interface';
-import { IVisualizerContextService } from 'src/app/interfaces/i-visualizer-context.service';
-import { selectCurrentSolutionGoods } from 'src/app/store/selectors/i-solution.selectors';
-import { selectSnapshot } from 'src/app/methods/select-snapshot.shared-methods';
+import {Injectable} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {IGood} from 'src/app/interfaces/i-good.interface';
+import {IVisualizerContextService} from 'src/app/interfaces/i-visualizer-context.service';
+import {selectCurrentSolutionGoods} from 'src/app/store/selectors/i-solution.selectors';
+import {selectSnapshot} from 'src/app/methods/select-snapshot.shared-methods';
 
 @Injectable()
 export class VisualizerComponentService implements IVisualizerContextService {
-
   private _hoveredGood = new BehaviorSubject<IGood | null>(null);
   private _reRenderingTriggered = new Subject<void>();
   private _selectedGood = new BehaviorSubject<IGood | null>(null);
 
-  public hoveredGood$: Observable<IGood | null> = this._hoveredGood.asObservable();
-  public reRenderingTriggered$: Observable<void> = this._reRenderingTriggered.asObservable();
-  public selectedGood$: Observable<IGood | null> = this._selectedGood.asObservable();
+  public hoveredGood$: Observable<IGood | null> =
+    this._hoveredGood.asObservable();
+  public reRenderingTriggered$: Observable<void> =
+    this._reRenderingTriggered.asObservable();
+  public selectedGood$: Observable<IGood | null> =
+    this._selectedGood.asObservable();
 
-  constructor(private _store: Store) { }
+  constructor(private _store: Store) {}
 
   public hoverGood(good: IGood | null): void {
     this._hoveredGood.next(good);
@@ -29,7 +31,9 @@ export class VisualizerComponentService implements IVisualizerContextService {
       return;
     }
 
-    const goods = await selectSnapshot(this._store.select(selectCurrentSolutionGoods));
+    const goods = await selectSnapshot(
+      this._store.select(selectCurrentSolutionGoods)
+    );
     this._hoveredGood.next(goods.find(good => good.id === goodId) ?? null);
   }
 
@@ -47,7 +51,9 @@ export class VisualizerComponentService implements IVisualizerContextService {
       return;
     }
 
-    const goods = await selectSnapshot(this._store.select(selectCurrentSolutionGoods));
+    const goods = await selectSnapshot(
+      this._store.select(selectCurrentSolutionGoods)
+    );
     this._selectedGood.next(goods.find(good => good.id === goodId) ?? null);
   }
 }

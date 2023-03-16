@@ -1,5 +1,5 @@
 export interface IPositionedElement {
-    xCoord: number;
-    yCoord: number;
-    zCoord: number;
+  xCoord: number;
+  yCoord: number;
+  zCoord: number;
 }

@@ -1,14 +1,12 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { SolutionError } from '../globals';
+import {Pipe, PipeTransform} from '@angular/core';
+import {SolutionError} from '../globals';
 
 @Pipe({
-  name: 'solutionValidationError'
+  name: 'solutionValidationError',
 })
 export class SolutionValidationErrorPipe implements PipeTransform {
-
   transform(errorCode: SolutionError): string {
     switch (errorCode) {
-
       case SolutionError.NoSolution:
         return 'no solution';
 
@@ -34,9 +32,7 @@ export class SolutionValidationErrorPipe implements PipeTransform {
         return 'solution contains goods, jutting over the z edge of the container';
 
       case SolutionError.GoodOverlap:
-        return 'solution\' goods overlapping'
-
+        return "solution' goods overlapping";
     }
   }
-
 }

@@ -6,7 +6,14 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix",
+    "prepare": "npm.cmd run compile",
+    "pretest": "npm.cmd run compile",
+    "posttest": "npm.cmd run lint"
   },
   "private": true,
   "dependencies": {
@@ -39,12 +46,17 @@
     "@angular/compiler-cli": "^15.1.0",
     "@types/jasmine": "~4.3.0",
     "@types/uuid": "^9.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
+    "eslint": "^8.36.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
-    "typescript": "~4.9.4"
+    "typescript": "^4.9.5",
+    "gts": "^3.1.1",
+    "@types/node": "^14.11.2"
   }
 }

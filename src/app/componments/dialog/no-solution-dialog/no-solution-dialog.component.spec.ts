@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NoSolutionDialogComponent } from './no-solution-dialog.component';
+import {NoSolutionDialogComponent} from './no-solution-dialog.component';
 
 describe('NoSolutionDialogComponent', () => {
   let component: NoSolutionDialogComponent;
@@ -8,9 +8,8 @@ describe('NoSolutionDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NoSolutionDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [NoSolutionDialogComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NoSolutionDialogComponent);
     component = fixture.componentInstance;

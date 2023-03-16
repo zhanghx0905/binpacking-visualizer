@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SceneVisualizationComponent } from './scene-visualization.component';
+import {SceneVisualizationComponent} from './scene-visualization.component';
 
 describe('SceneVisualizationComponent', () => {
   let component: SceneVisualizationComponent;
@@ -8,9 +8,8 @@ describe('SceneVisualizationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SceneVisualizationComponent ]
-    })
-    .compileComponents();
+      declarations: [SceneVisualizationComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SceneVisualizationComponent);
     component = fixture.componentInstance;

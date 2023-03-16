@@ -1,5 +1,5 @@
-import { createAction, props } from '@ngrx/store';
-import { ISolution } from 'src/app/interfaces/i-solution.interface';
+import {createAction, props} from '@ngrx/store';
+import {ISolution} from 'src/app/interfaces/i-solution.interface';
 
 export const solutionActions = {
   AddSolution: '[Solution] Add Solution',
@@ -12,22 +12,20 @@ export const solutionActions = {
   SetCurrentSolution: '[Solution] Set Current Solution',
   SetNextSolution: '[Solution] Set Next Solution',
   UpdateAlgorithmSolution: '[Solution] Update Algorithm Solution',
-  UpdateSolution: '[Solution] Update Solution'
-}
+  UpdateSolution: '[Solution] Update Solution',
+};
 
 export const addSolution = createAction(
   solutionActions.AddSolution,
-  props<{ solution: Partial<ISolution> }>()
+  props<{solution: Partial<ISolution>}>()
 );
 
 export const addSolutions = createAction(
   solutionActions.AddSolutions,
-  props<{ solutions: ISolution[] }>()
+  props<{solutions: ISolution[]}>()
 );
 
-export const clearSolutions = createAction(
-  solutionActions.ClearSolutions
-);
+export const clearSolutions = createAction(solutionActions.ClearSolutions);
 
 export const downloadCurrentSolution = createAction(
   solutionActions.DownloadCurrentSolution
@@ -35,7 +33,7 @@ export const downloadCurrentSolution = createAction(
 
 export const duplicateSolution = createAction(
   solutionActions.DuplicateSolution,
-  props<{ duplicateSolution: ISolution }>()
+  props<{duplicateSolution: ISolution}>()
 );
 
 export const setExemplarySolution = createAction(
@@ -44,24 +42,22 @@ export const setExemplarySolution = createAction(
 
 export const removeSolution = createAction(
   solutionActions.RemoveSolution,
-  props<{ removeSolution: ISolution }>()
+  props<{removeSolution: ISolution}>()
 );
 
 export const setCurrentSolution = createAction(
   solutionActions.SetCurrentSolution,
-  props<{ solution: ISolution | null }>()
+  props<{solution: ISolution | null}>()
 );
 
-export const setNextSolution = createAction(
-  solutionActions.SetNextSolution
-);
+export const setNextSolution = createAction(solutionActions.SetNextSolution);
 
 export const updateAlgorithmSolution = createAction(
   solutionActions.UpdateAlgorithmSolution,
-  props<{ solution: ISolution }>()
-)
+  props<{solution: ISolution}>()
+);
 
 export const updateSolution = createAction(
   solutionActions.UpdateSolution,
-  props<{ solution: ISolution }>()
-)
+  props<{solution: ISolution}>()
+);

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SolutionValidationComponent } from './solution-validation.component';
+import {SolutionValidationComponent} from './solution-validation.component';
 
 describe('SolutionValidationComponent', () => {
   let component: SolutionValidationComponent;
@@ -8,9 +8,8 @@ describe('SolutionValidationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SolutionValidationComponent ]
-    })
-    .compileComponents();
+      declarations: [SolutionValidationComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SolutionValidationComponent);
     component = fixture.componentInstance;

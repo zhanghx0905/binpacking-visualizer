@@ -1,6 +1,6 @@
-import { IDimension } from "./i-dimension.interface";
+import {IDimension} from './i-dimension.interface';
 
 export interface IVirtualDimension extends IDimension {
-    stackedOn?: number;
-    groupRestrictedBy?: number;
+  stackedOn?: number;
+  groupRestrictedBy?: number;
 }

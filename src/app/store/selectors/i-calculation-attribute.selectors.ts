@@ -1,7 +1,11 @@
-import { createSelector } from '@ngrx/store';
-import { calculationAttributesFeatureKey, State } from '../reducers/i-calculation-attribute.reducers';
+import {createSelector} from '@ngrx/store';
+import {
+  calculationAttributesFeatureKey,
+  State,
+} from '../reducers/i-calculation-attribute.reducers';
 
-export const solutionsState = (state: any) => state[calculationAttributesFeatureKey] as State;
+export const solutionsState = (state: any) =>
+  state[calculationAttributesFeatureKey] as State;
 
 export const selectContainerHeight = createSelector(
   solutionsState,

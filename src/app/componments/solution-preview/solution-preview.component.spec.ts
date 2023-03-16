@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SolutionPreviewComponent } from './solution-preview.component';
+import {SolutionPreviewComponent} from './solution-preview.component';
 
 describe('SolutionPreviewComponent', () => {
   let component: SolutionPreviewComponent;
@@ -8,9 +8,8 @@ describe('SolutionPreviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SolutionPreviewComponent ]
-    })
-    .compileComponents();
+      declarations: [SolutionPreviewComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SolutionPreviewComponent);
     component = fixture.componentInstance;

@@ -1,4 +1,4 @@
-import { createReducer, on } from '@ngrx/store';
+import {createReducer, on} from '@ngrx/store';
 import {
   setContainerHeight,
   setContainerWidth,
@@ -6,8 +6,8 @@ import {
   updateCalculationAttributes,
 } from '../actions/i-calculation-attribute.actions';
 import exampleSolution from 'src/config/example-solution';
-import { setExemplarySolution } from '../actions/i-solution.actions';
-import { Unit } from "src/app/globals";
+import {setExemplarySolution} from '../actions/i-solution.actions';
+import {Unit} from 'src/app/globals';
 
 export const calculationAttributesFeatureKey = 'calculationAttributes';
 
@@ -20,32 +20,32 @@ export interface State {
 export const initialState: State = {
   containerHeight: 1000,
   containerWidth: 1000,
-  unit: 'mm' as Unit
-}
+  unit: 'mm' as Unit,
+};
 
 export const calculationAttributesReducer = createReducer(
   initialState,
-  on(setContainerHeight, (state, { height }) => {
-    return { ...state, containerHeight: height };
+  on(setContainerHeight, (state, {height}) => {
+    return {...state, containerHeight: height};
   }),
-  on(setContainerWidth, (state, { width }) => {
-    return { ...state, containerWidth: width };
+  on(setContainerWidth, (state, {width}) => {
+    return {...state, containerWidth: width};
   }),
   on(setExemplarySolution, () => {
     return {
       containerHeight: exampleSolution.container.height,
       containerWidth: exampleSolution.container.width,
-      unit: exampleSolution.container.unit as Unit
+      unit: exampleSolution.container.unit as Unit,
     };
   }),
-  on(setUnit, (state, { unit }) => {
-    return { ...state, unit: unit };
+  on(setUnit, (state, {unit}) => {
+    return {...state, unit: unit};
   }),
   on(updateCalculationAttributes, (_, variables) => {
     return {
       containerHeight: variables.containerHeight,
       containerWidth: variables.containerWidth,
-      unit: variables.unit
+      unit: variables.unit,
     };
   })
 );

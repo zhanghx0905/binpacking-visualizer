@@ -1,11 +1,12 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  /* To learn more about this file see: https://angular.io/config/tsconfig. */
   "compileOnSave": false,
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
+    "outDir": "./dist/",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -31,5 +32,9 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts"
+  ]
 }
