@@ -1,0 +1,32 @@
+.body {
+    display: flex;
+    flex-direction: row;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    overflow: hidden;
+}
+
+.body.loading {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.content {
+    flex: 1;
+    background-color: rgb(243, 243, 243);
+    overflow: hidden;
+}
+
+.progress-bar {
+    position: absolute;
+    width: 100vw;
+    top: 0px;
+    left: 0px;
+    z-index: 1001;
+}
+
+@media screen and (max-width: 500px) {
+    .body {
+        flex-direction: column-reverse;
+    }
+}

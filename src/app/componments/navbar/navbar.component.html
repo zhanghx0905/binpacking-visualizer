@@ -1,0 +1,28 @@
+<div class="body" [class.limited-height]="(limitedHeight$|async)">
+
+    <div id="visualization-option-wrapper" class="option-wrapper" [class.disabled]="(solutionCount$|async) === 0">
+       <div class="option" routerLink="visualizer" [class.active]="router.url === '/visualizer'">
+ 
+          <mat-icon class="icon">view_in_ar</mat-icon>
+          <div class="text">visualization</div>
+    
+       </div>
+    </div>
+ 
+    <div class="spacer"></div>
+ 
+    <!-- <div class="option-wrapper">
+       <div class="option" routerLink="about" [class.active]="router.url === '/about'">
+ 
+          <mat-icon class="icon">help</mat-icon>
+          <div class="text">about</div>
+    
+       </div>
+    </div> -->
+ 
+    <!-- <div class="version">
+       version {{currentApplicationVersion ?? 'local dev'}}
+    </div>
+  -->
+ </div>
+ 
