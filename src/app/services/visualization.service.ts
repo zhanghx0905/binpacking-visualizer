@@ -42,8 +42,8 @@ export class VisualizationService {
           'good',
           containerPosition
         );
-        goodResult.mesh.userData["goodId"] = good.id;
-        goodResult.mesh.userData["color"] = good.color;
+        goodResult.mesh.userData['goodId'] = good.id;
+        goodResult.mesh.userData['color'] = good.color;
         goodMeshes.push({goodId: good.id, mesh: goodResult.mesh});
         scene.add(goodResult.edges, goodResult.mesh);
       }
@@ -64,7 +64,7 @@ export class VisualizationService {
         );
       }
     }
-    return {scene, goodMeshes};
+    // return {scene, goodMeshes};
   }
 
   public static getContainerUnloadingArrow(

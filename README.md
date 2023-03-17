@@ -4,6 +4,8 @@ The application is based on https://github.com/SebLeich/storage-manager-2.0 and 
 
 Currently it is only used to visualize the results of the bin packing algorithms.
 
+![](.\doc\screenshot.png)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

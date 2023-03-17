@@ -82,19 +82,19 @@ export class SceneVisualizationComponent
     const goodId = typeof arg === 'string' ? arg : arg.id;
     const meshes = this.scene.children.filter(
       candidate =>
-        candidate instanceof ThreeJS.Mesh && !!candidate.userData["goodId"]
+        candidate instanceof ThreeJS.Mesh && !!candidate.userData['goodId']
     ) as ThreeJS.Mesh[];
     meshes.forEach(mesh => {
-      (mesh.material as ThreeJS.MeshBasicMaterial)["color"].set(
-        mesh.userData["goodId"] === goodId
+      (mesh.material as ThreeJS.MeshBasicMaterial)['color'].set(
+        mesh.userData['goodId'] === goodId
           ? 'white'
-          : mesh.userData["color"] ?? 'black'
+          : mesh.userData['color'] ?? 'black'
       );
     });
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes["scene"]) {
+    if (changes['scene']) {
       this.tryToRender();
     }
   }
@@ -122,11 +122,11 @@ export class SceneVisualizationComponent
   public async resetGoodColors() {
     const meshes = this.scene.children.filter(
       candidate =>
-        candidate instanceof ThreeJS.Mesh && !!candidate.userData["goodId"]
+        candidate instanceof ThreeJS.Mesh && !!candidate.userData['goodId']
     ) as ThreeJS.Mesh[];
     meshes.forEach(mesh => {
-      (mesh.material as ThreeJS.MeshBasicMaterial)["color"].set(
-        mesh.userData["color"] ?? 'black'
+      (mesh.material as ThreeJS.MeshBasicMaterial)['color'].set(
+        mesh.userData['color'] ?? 'black'
       );
     });
   }
@@ -172,7 +172,7 @@ export class SceneVisualizationComponent
         event,
         this.scene
       );
-    if (!hoveredElement || !hoveredElement.object.userData["goodId"]) {
+    if (!hoveredElement || !hoveredElement.object.userData['goodId']) {
       await this.resetGoodColors();
       this._hoveredGoodId.next(null);
       this.hoveredGood.emit(null);
@@ -183,7 +183,7 @@ export class SceneVisualizationComponent
       return;
     }
 
-    const goodId = hoveredElement.object.userData["goodId"];
+    const goodId = hoveredElement.object.userData['goodId'];
     await this.highlightGood(goodId);
     this._hoveredGoodId.next(goodId);
     this.hoveredGood.emit(goodId);
@@ -203,7 +203,7 @@ export class SceneVisualizationComponent
         event,
         this.scene
       );
-    if (!hoveredElement || !hoveredElement.object.userData["goodId"]) {
+    if (!hoveredElement || !hoveredElement.object.userData['goodId']) {
       await this.resetGoodColors();
       this._hoveredGoodId.next(null);
       this.hoveredGood.emit(null);
@@ -213,7 +213,7 @@ export class SceneVisualizationComponent
       return;
     }
 
-    const goodId = hoveredElement.object.userData["goodId"];
+    const goodId = hoveredElement.object.userData['goodId'];
     await this.highlightGood(goodId);
     this._hoveredGoodId.next(goodId);
     this.hoveredGood.emit(goodId);
