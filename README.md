@@ -4,7 +4,7 @@ The application is based on https://github.com/SebLeich/storage-manager-2.0 and 
 
 Currently it is only used to visualize the results of the bin packing algorithms.
 
-![](.\doc\screenshot.png)
+![](./doc/screenshot.png)
 
 ## Development server
 
