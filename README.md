@@ -1,6 +1,6 @@
 # Binpacking-Visualizer
 
-The application is based on https://github.com/SebLeich/storage-manager-2.0 and written with TypeScript (Angular 14) and implemented using three.js.
+The application is based on https://github.com/SebLeich/storage-manager-2.0 and written with TypeScript (Angular) and three.js.
 
 Currently it is only used to visualize the results of the bin packing algorithms.
 
