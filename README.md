@@ -16,6 +16,26 @@ The previous Angular implementation is kept in the `angular-v0.1` branch.
 - Solution validation for out-of-container and overlapping goods
 - Upload another solution JSON
 - Download the current solution JSON
+- Generate a deterministic random example
+- Repack the current solution with the built-in 3D shelf optimizer
+
+## Packing Optimizer
+
+The optimizer is inspired by Google OR-Tools' bin packing formulation:
+
+https://developers.google.com/optimization/pack/bin_packing
+
+The OR-Tools example models bin packing as an optimization problem that minimizes the number of bins used. This application runs fully in the browser, while the official OR-Tools package targets Python, C++, Java, and C#. For that reason, the app uses a lightweight TypeScript 3D shelf-packing heuristic instead of bundling OR-Tools directly.
+
+The built-in optimizer:
+
+- sorts generated or uploaded goods by volume
+- allows width/length rotation
+- packs goods row by row and layer by layer into one container
+- produces the same solution JSON shape used by the visualizer
+- reports unpacked goods in the generated solution description
+
+Use `random example` to generate and pack a seeded set of goods. Use `optimize current` to repack the currently selected solution's goods into the same container.
 
 ## Development Server
 

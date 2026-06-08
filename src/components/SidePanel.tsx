@@ -1,6 +1,7 @@
 import { Cuboid, Download, RefreshCw, Upload } from "lucide-react";
 import { ContainerSummary } from "@/components/ContainerSummary";
 import { GoodsTable } from "@/components/GoodsTable";
+import { OptimizerControls } from "@/components/OptimizerControls";
 import { ValidationPanel } from "@/components/ValidationPanel";
 import type { Solution, ValidationIssue } from "@/types/solution";
 
@@ -14,6 +15,12 @@ type Props = {
   onSelectSolution: (index: number) => void;
   onUpload: (file: File) => void;
   onDownload: () => void;
+  randomCount: number;
+  randomSeed: number;
+  onRandomCountChange: (count: number) => void;
+  onRandomSeedChange: (seed: number) => void;
+  onGenerateRandomExample: () => void;
+  onOptimizeCurrentSolution: () => void;
   onHoverGood: (goodId: string | null) => void;
   onSelectGood: (goodId: string) => void;
 };
@@ -28,6 +35,12 @@ export function SidePanel({
   onSelectSolution,
   onUpload,
   onDownload,
+  randomCount,
+  randomSeed,
+  onRandomCountChange,
+  onRandomSeedChange,
+  onGenerateRandomExample,
+  onOptimizeCurrentSolution,
   onHoverGood,
   onSelectGood,
 }: Props) {
@@ -45,7 +58,9 @@ export function SidePanel({
         <h1>{currentSolution.description ?? "unknown"}</h1>
         <div className="solution-meta">
           {currentSolution.calculationSource.title}
-          {currentSolution.calculated ? ` · ${new Date(currentSolution.calculated).toLocaleString()}` : ""}
+          {currentSolution.calculated
+            ? ` - ${new Date(currentSolution.calculated).toLocaleString()}`
+            : ""}
         </div>
       </div>
 
@@ -64,6 +79,15 @@ export function SidePanel({
           </select>
         </label>
       ) : null}
+
+      <OptimizerControls
+        count={randomCount}
+        seed={randomSeed}
+        onCountChange={onRandomCountChange}
+        onSeedChange={onRandomSeedChange}
+        onGenerate={onGenerateRandomExample}
+        onOptimize={onOptimizeCurrentSolution}
+      />
 
       <ContainerSummary container={currentSolution.container} />
 
@@ -98,7 +122,11 @@ export function SidePanel({
           <Download size={16} />
           <span>download</span>
         </button>
-        <button type="button" className="action-button" onClick={() => location.reload()}>
+        <button
+          type="button"
+          className="action-button"
+          onClick={() => location.reload()}
+        >
           <RefreshCw size={16} />
           <span>reload</span>
         </button>

@@ -10,6 +10,10 @@ import {
   normalizeSolutionFile,
   serializeSolution,
 } from "@/lib/normalize-solution";
+import {
+  createRandomOptimizedSolution,
+  optimizeExistingSolution,
+} from "@/lib/packing";
 import { validateSolution } from "@/lib/validation";
 import type { Solution } from "@/types/solution";
 
@@ -20,6 +24,8 @@ export default function Home() {
   const [selectedGoodId, setSelectedGoodId] = useState<string | null>(null);
   const [panelVisible, setPanelVisible] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [randomCount, setRandomCount] = useState(24);
+  const [randomSeed, setRandomSeed] = useState(2026);
 
   useEffect(() => {
     let cancelled = false;
@@ -87,6 +93,32 @@ export default function Home() {
     URL.revokeObjectURL(url);
   }
 
+  function addSolution(nextSolution: Solution) {
+    const nextIndex = solutions.length;
+    setSolutions((existing) => [...existing, nextSolution]);
+    setCurrentIndex(nextIndex);
+    setHoveredGoodId(null);
+    setSelectedGoodId(null);
+    setError(null);
+  }
+
+  function generateRandomExample() {
+    addSolution(
+      createRandomOptimizedSolution({
+        count: clampInteger(randomCount, 1, 60),
+        seed: clampInteger(randomSeed, 1, Number.MAX_SAFE_INTEGER),
+      }),
+    );
+    setRandomSeed((seed) => seed + 1);
+  }
+
+  function optimizeCurrentSolution() {
+    if (!currentSolution) {
+      return;
+    }
+    addSolution(optimizeExistingSolution(currentSolution));
+  }
+
   if (error && !currentSolution) {
     return <main className="loading-state">{error}</main>;
   }
@@ -112,6 +144,14 @@ export default function Home() {
           }}
           onUpload={uploadSolution}
           onDownload={downloadSolution}
+          randomCount={randomCount}
+          randomSeed={randomSeed}
+          onRandomCountChange={(count) => setRandomCount(clampInteger(count, 1, 60))}
+          onRandomSeedChange={(seed) =>
+            setRandomSeed(clampInteger(seed, 1, Number.MAX_SAFE_INTEGER))
+          }
+          onGenerateRandomExample={generateRandomExample}
+          onOptimizeCurrentSolution={optimizeCurrentSolution}
           onHoverGood={setHoveredGoodId}
           onSelectGood={setSelectedGoodId}
         />
@@ -152,4 +192,11 @@ export default function Home() {
       </div>
     </main>
   );
+}
+
+function clampInteger(value: number, min: number, max: number) {
+  if (!Number.isFinite(value)) {
+    return min;
+  }
+  return Math.min(Math.max(Math.floor(value), min), max);
 }
