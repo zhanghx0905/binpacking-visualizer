@@ -89,7 +89,10 @@ export function SidePanel({
         onOptimize={onOptimizeCurrentSolution}
       />
 
-      <ContainerSummary container={currentSolution.container} />
+      <ContainerSummary
+        container={currentSolution.container}
+        unpackedCount={currentSolution.unpackedGoods?.length ?? 0}
+      />
 
       <GoodsTable
         goods={currentSolution.container.goods}

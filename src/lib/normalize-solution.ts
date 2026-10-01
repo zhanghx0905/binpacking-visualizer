@@ -88,6 +88,11 @@ export function normalizeSolutionFile(input: unknown): Solution {
             title: asString(rawSolution.algorithm, "unknown source"),
           },
     container: normalizeContainer(rawContainer),
+    unpackedGoods: Array.isArray(rawSolution.unpackedGoods)
+      ? rawSolution.unpackedGoods.map((good, index) =>
+          normalizeGood((good ?? {}) as UnknownRecord, index),
+        )
+      : [],
   };
 }
 

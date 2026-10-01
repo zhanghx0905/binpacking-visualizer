@@ -5,9 +5,10 @@ import { Metric } from "@/components/Metric";
 
 type Props = {
   container: Container;
+  unpackedCount?: number;
 };
 
-export function ContainerSummary({ container }: Props) {
+export function ContainerSummary({ container, unpackedCount = 0 }: Props) {
   const used = container.goods.reduce(
     (sum, good) => sum + good.width * good.height * good.length,
     0,
@@ -32,6 +33,9 @@ export function ContainerSummary({ container }: Props) {
         </div>
         <div className="usage-caption">
           {formatVolume(used, container.unit, 2, true)} used
+        </div>
+        <div className={`usage-caption${unpackedCount > 0 ? " accent-text" : ""}`}>
+          {container.goods.length} packed, {unpackedCount} unpacked
         </div>
       </div>
 

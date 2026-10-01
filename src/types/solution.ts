@@ -50,6 +50,7 @@ export type Solution = Entity & {
     title: string;
   };
   container: Container;
+  unpackedGoods?: Good[];
 };
 
 export type SolutionFile = {
@@ -59,6 +60,8 @@ export type SolutionFile = {
 export enum SolutionError {
   NoSolution = "NoSolution",
   NoContainer = "NoContainer",
+  InvalidContainerDimensions = "InvalidContainerDimensions",
+  InvalidGoodGeometry = "InvalidGoodGeometry",
   GoodBeforeContainerXCoord = "GoodBeforeContainerXCoord",
   GoodOutOfContainerXCoord = "GoodOutOfContainerXCoord",
   GoodBeforeContainerYCoord = "GoodBeforeContainerYCoord",
@@ -66,6 +69,8 @@ export enum SolutionError {
   GoodBeforeContainerZCoord = "GoodBeforeContainerZCoord",
   GoodOutOfContainerZCoord = "GoodOutOfContainerZCoord",
   GoodOverlap = "GoodOverlap",
+  GoodUnsupported = "GoodUnsupported",
+  StackingNotAllowed = "StackingNotAllowed",
 }
 
 export type ValidationIssue = {

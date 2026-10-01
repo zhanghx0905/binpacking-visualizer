@@ -1,13 +1,14 @@
 import {
   SolutionError,
   type Good,
-  type Positioned,
   type Solution,
-  type Space,
   type ValidationIssue,
 } from "@/types/solution";
 
-type Box = Space & Positioned;
+import {
+  boxesOverlap, hasFullSupport, hasValidCoordinates, hasValidDimensions,
+  supportingGoods, tolerance,
+} from "@/lib/geometry";
 
 export function validationErrorText(error: SolutionError): string {
   switch (error) {
@@ -15,6 +16,14 @@ export function validationErrorText(error: SolutionError): string {
       return "no solution";
     case SolutionError.NoContainer:
       return "solution without container";
+    case SolutionError.InvalidContainerDimensions:
+      return "container dimensions must be finite and positive";
+    case SolutionError.InvalidGoodGeometry:
+      return "goods must have finite coordinates and positive finite dimensions";
+    case SolutionError.GoodUnsupported:
+      return "solution contains goods without full support beneath their base";
+    case SolutionError.StackingNotAllowed:
+      return "solution stacks goods marked as non-stackable";
     case SolutionError.GoodBeforeContainerXCoord:
       return "solution contains goods positioned before the container on x";
     case SolutionError.GoodOutOfContainerXCoord:
@@ -42,42 +51,57 @@ export function validateSolution(solution: Solution | null): ValidationIssue[] {
   }
 
   const { container } = solution;
-  const goods = container.goods ?? [];
   const issues: ValidationIssue[] = [];
+  if (!hasValidDimensions(container)) {
+    issues.push({ error: SolutionError.InvalidContainerDimensions, affectedGoods: [] });
+  }
+  const allGoods = container.goods ?? [];
+  const isValid = (good: Good) => hasValidDimensions(good) && hasValidCoordinates(good);
+  addBoundaryIssue(issues, SolutionError.InvalidGoodGeometry, allGoods.filter((good) => !isValid(good)));
+  const goods = allGoods.filter(isValid);
 
   addBoundaryIssue(
     issues,
     SolutionError.GoodBeforeContainerXCoord,
-    goods.filter((good) => good.xCoord < 0),
+    goods.filter((good) => good.xCoord < -tolerance(good.xCoord)),
   );
   addBoundaryIssue(
     issues,
     SolutionError.GoodOutOfContainerXCoord,
-    goods.filter((good) => good.xCoord + good.width > container.width),
+    goods.filter((good) => good.xCoord + good.width > container.width + tolerance(container.width)),
   );
   addBoundaryIssue(
     issues,
     SolutionError.GoodBeforeContainerYCoord,
-    goods.filter((good) => good.yCoord < 0),
+    goods.filter((good) => good.yCoord < -tolerance(good.yCoord)),
   );
   addBoundaryIssue(
     issues,
     SolutionError.GoodOutOfContainerYCoord,
-    goods.filter((good) => good.yCoord + good.height > container.height),
+    goods.filter((good) => good.yCoord + good.height > container.height + tolerance(container.height)),
   );
   addBoundaryIssue(
     issues,
     SolutionError.GoodBeforeContainerZCoord,
-    goods.filter((good) => good.zCoord < 0),
+    goods.filter((good) => good.zCoord < -tolerance(good.zCoord)),
   );
   addBoundaryIssue(
     issues,
     SolutionError.GoodOutOfContainerZCoord,
-    goods.filter((good) => good.zCoord + good.length > container.length),
+    goods.filter((good) => good.zCoord + good.length > container.length + tolerance(container.length)),
   );
 
   for (let index = 0; index < goods.length; index += 1) {
     const good = goods[index];
+    if (good.yCoord > tolerance(good.yCoord)) {
+      const bases = supportingGoods(good, goods);
+      if (!hasFullSupport(good, bases)) {
+        issues.push({ error: SolutionError.GoodUnsupported, affectedGoods: [good] });
+      }
+      if (good.stackingAllowed === false || bases.some((base) => base.stackingAllowed === false)) {
+        issues.push({ error: SolutionError.StackingNotAllowed, affectedGoods: [good, ...bases] });
+      }
+    }
     const overlaps = goods
       .slice(index + 1)
       .filter((candidate) => boxesOverlap(good, candidate));
@@ -100,18 +124,4 @@ function addBoundaryIssue(
   if (affectedGoods.length > 0) {
     issues.push({ error, affectedGoods });
   }
-}
-
-function boxesOverlap(boxA: Box, boxB: Box): boolean {
-  const separateX =
-    boxA.xCoord + boxA.width <= boxB.xCoord ||
-    boxB.xCoord + boxB.width <= boxA.xCoord;
-  const separateY =
-    boxA.yCoord + boxA.height <= boxB.yCoord ||
-    boxB.yCoord + boxB.height <= boxA.yCoord;
-  const separateZ =
-    boxA.zCoord + boxA.length <= boxB.zCoord ||
-    boxB.zCoord + boxB.length <= boxA.zCoord;
-
-  return !(separateX || separateY || separateZ);
 }
